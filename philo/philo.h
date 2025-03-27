@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/03/27 16:54:48 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:43:16 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+#include <stdbool.h>
+#include <limits.h>
 
 #endif
 
@@ -53,3 +55,8 @@ typedef struct s_table
     t_fork *forks;
     t_philo *philos;
 }              t_table;
+
+
+void error_exit(char *error_message);
+void parse_input(t_table *table, char **av);
+

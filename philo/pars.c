@@ -27,7 +27,7 @@ static const char *valid_input(const char *str)
     if (*str == '+')
         ++str;
     else if (*str == '-')
-        error_exit("Feed me only positive numbers u suck!");    
+        error_exit("Feed me only positive numbers");    
 	if(!ft_isdigit(*str))
         error_exit("The İnput is not a correct digit");
     nbr = str;

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/03/27 17:43:16 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:05:19 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_table
     long time_to_eat;
     long time_to_sleep;
     long num_limit_meals;
-    long start_time;
+    long start_simulation;
     bool end_simulation;
     t_fork *forks;
     t_philo *philos;
@@ -59,4 +59,6 @@ typedef struct s_table
 
 void error_exit(char *error_message);
 void parse_input(t_table *table, char **av);
+void *safe_malloc(size_t bytes);
+
 

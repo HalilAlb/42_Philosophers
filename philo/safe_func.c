@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   safe_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 16:59:51 by malbayra          #+#    #+#             */
-/*   Updated: 2025/03/27 17:53:46 by malbayra         ###   ########.fr       */
+/*   Created: 2025/03/27 18:01:42 by malbayra          #+#    #+#             */
+/*   Updated: 2025/03/27 18:05:06 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char **av)
+void *safe_malloc(size_t bytes)
 {
-    t_table table;
+    void *ptr;
 
-    if (ac != 5 && ac != 6)
-    {
-        error_exit("Wrong input:\n"
-            "Correct is: ./philo 5 800 200 200 [5]");
-    }
-    else if (ac == 5 || ac == 6)
-    {
-        parse_input(&table, av);
-        data_init(&table);
-    }
-    
+    ptr = malloc(bytes);
+    if (NULL == ptr)
+        error_exit("Malloc failed");
+    return (ptr);
 }

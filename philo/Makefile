@@ -13,11 +13,11 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(PRINTF) $(GNL) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) $(PRINTF) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(LIBFTDIR) -I $(PRINTFDIR) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)

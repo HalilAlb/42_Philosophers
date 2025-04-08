@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/03/27 18:05:19 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:37:45 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 #include <limits.h>
 
 #endif
+
+typedef enum e_opcode
+{
+   LOCK,
+    UNLOCK,
+    INIT,
+    DESTROY,
+    CREATE,
+    JOIN,
+    DETACH,
+}  t_opcode;
 
 typedef pthread_mutex_t t_mutex;
 
@@ -60,5 +71,7 @@ typedef struct s_table
 void error_exit(char *error_message);
 void parse_input(t_table *table, char **av);
 void *safe_malloc(size_t bytes);
+void data_init(t_table *table);
+void safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 
 

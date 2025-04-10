@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/08 11:37:45 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:29:42 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 #include <stdbool.h>
 #include <limits.h>
+# include <errno.h>
 
 #endif
 
@@ -48,8 +49,8 @@ typedef struct s_philo
     long    meals_counter;
     bool    full;
     long    last_meal_time;
-    t_fork  *left_fork;
-    t_fork  *right_fork;
+    t_fork  *first_fork;
+    t_fork  *second_fork;
     pthread_t   thread_id;
     t_table     *table;
 }               t_philo;

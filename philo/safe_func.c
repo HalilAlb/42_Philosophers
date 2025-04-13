@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:01:42 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/10 16:41:07 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/13 23:32:15 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,15 @@ void safe_mutex_handle(t_mutex *mutex, t_opcode opcode)
         handle_mutex_error(pthread_mutex_destroy  (mutex),opcode);
     else
         error_exit("wrong opcode for mutex handle");
+}
+
+static void handle_pthread_error(int stat, t_opcode opcode)
+{
+    if (0 == stat)
+        return ;
+    if (EAGAIN == stat)
+        error_exit("No resources to create another thread");
+    else if (EPERM == stat)
+        error_exit("The caller dose not have appropriate permission");
+    else if (E)
 }

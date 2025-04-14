@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/10 17:29:42 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:07:56 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@
 #include <limits.h>
 # include <errno.h>
 
+
+#define DEBUG_MOD 0
+
 #endif
+
+typedef enum s_status
+{
+    EATING,
+    SLEEPING,
+    THINKING,
+    TAKE_FIRST_FORK,
+    TAKE_SECOND_FORK,
+    DIAD,
+} t_philo_status;
 
 typedef enum e_opcode
 {
@@ -34,6 +47,13 @@ typedef enum e_opcode
     JOIN,
     DETACH,
 }  t_opcode;
+
+typedef enum e_time_code
+{
+    SECOND,
+    MILISECOND,
+    MICROSECOND,
+} t_time_code;
 
 typedef pthread_mutex_t t_mutex;
 
@@ -63,7 +83,10 @@ typedef struct s_table
     long time_to_sleep;
     long num_limit_meals;
     long start_simulation;
+    bool all_threads_ready;
     bool end_simulation;
+    t_mutex table_mutex;
+    t_mutex print_mutex;
     t_fork *forks;
     t_philo *philos;
 }              t_table;
@@ -74,5 +97,22 @@ void parse_input(t_table *table, char **av);
 void *safe_malloc(size_t bytes);
 void data_init(t_table *table);
 void safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
+void safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+    void *data,t_opcode opcode);
+void set_bool(t_mutex *mutex, bool *dest, bool value);
+bool get_bool(t_mutex *mutex, long *src);
+long get_long(t_mutex *mutex, long *src);
+void set_long(t_mutex *mutex, long *dest, long value);
+bool simulations_fnished(t_table *table);
+long gettime(t_time_code time_code);
+
+
+void wait_all_threads(t_table *table);
+void precise_usleep(long usec, t_table *table);
+
+void write_status(t_philo_status status, t_philo *philo, bool debug);
+
+
+
 
 

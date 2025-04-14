@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/14 17:07:56 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:30:20 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_philo
     t_fork  *first_fork;
     t_fork  *second_fork;
     pthread_t   thread_id;
+    t_mutex     philo_mutex;
     t_table     *table;
 }               t_philo;
 
@@ -85,6 +86,8 @@ typedef struct s_table
     long start_simulation;
     bool all_threads_ready;
     bool end_simulation;
+    long threads_running_num;
+    pthread_t monitor_thread;
     t_mutex table_mutex;
     t_mutex print_mutex;
     t_fork *forks;

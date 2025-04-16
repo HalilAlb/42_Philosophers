@@ -6,7 +6,12 @@ SRCS = main.c \
 		pars.c \
 		init.c \
 		safe_func.c \
-		utils.c
+		utils.c \
+		dinner.c \
+		geters_seters.c \
+		hero_utils.c \
+		write.c \
+		monitor.c \
 
 
 OBJS = $(SRCS:.c=.o)

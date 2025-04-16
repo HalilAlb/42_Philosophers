@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:01:42 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 00:06:18 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:45:06 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static void	handle_mutex_error(int stat, t_opcode opcode)
 	else if (EINVAL == stat && INIT == opcode)
 		error_exit("The value of the mutex is invalid");
 	else if (EDEADLK == stat)
-		error_exit("A deadlock would accur if the thread blocked waiting for the mutex");
+		error_exit("A deadlock would accur if the thread\
+			blocked waiting for the mutex");
 	else if (EPERM == stat)
 		error_exit("The current thread does not hold a lock on mutex");
 	else if (ENOMEM == stat)
-		error_exit("The process connot allocate enough memory to create another the mutex");
+		error_exit("The process connot allocate enough\
+			memory to create another the mutex");
 	else if (EBUSY == stat)
 		error_exit("Mutex is Locked");
 }
@@ -68,10 +70,10 @@ static void	handle_thread_error(int stat, t_opcode opcode)
 		error_exit("The value specified by threads is not joinable\n");
 	else if (ESRCH == stat)
 		error_exit("No thread could be found corresponding to that"
-					" specified by the given thread ID, thread.");
+			" specified by the given thread ID, thread.");
 	else if (EDEADLK == stat)
 		error_exit("A deadlock was detected or the value of"
-					" thread specifies the calling thread");
+			" thread specifies the calling thread");
 }
 
 void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data,
@@ -85,5 +87,5 @@ void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data,
 		handle_thread_error(pthread_detach(*thread), opcode);
 	else
 		error_exit(" Wrong opcode for thread handle:"
-					" use <CREATE> <JOIN> <DETACH>");
+			" use <CREATE> <JOIN> <DETACH>");
 }

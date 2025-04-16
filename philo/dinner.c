@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 00:36:26 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:40:56 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,28 @@ void	*dinner_simulations(void *data)
 	return (NULL);
 }
 
-void    dinner_start(t_table *table)
+void	dinner_start(t_table *table)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    if (0 == table->num_limit_meals)
-        return ;
-    else if (1 == table->philo_num)
-        safe_thread_handle(&table->philos[0].thread_id, lone_philo,
-            &table->philos[0], CREATE);
-    else
-    {
-        while (++i < table->philo_num)
-            safe_thread_handle(&table->philos[i].thread_id, dinner_simulations,
-                &table->philos[i], CREATE);
-    }
-    safe_thread_handle(&table->monitor_thread, monitor_dinner, table, CREATE);
-    table->start_simulation = gettime(MILISECOND);
-    set_bool(&table->table_mutex, &table->all_threads_ready, true);
-
-    i = -1;
-    while (++i < table->philo_num)
-        safe_thread_handle(&table->philos[i].thread_id, NULL, NULL, JOIN);
-    set_bool(&table->table_mutex, &table->end_simulation, true);
-    safe_thread_handle(&table->monitor_thread, NULL, NULL, JOIN);
+	i = -1;
+	if (0 == table->num_limit_meals)
+		return ;
+	else if (1 == table->philo_num)
+		safe_thread_handle(&table->philos[0].thread_id, lone_philo,
+			&table->philos[0], CREATE);
+	else
+	{
+		while (++i < table->philo_num)
+			safe_thread_handle(&table->philos[i].thread_id, dinner_simulations,
+				&table->philos[i], CREATE);
+	}
+	safe_thread_handle(&table->monitor_thread, monitor_dinner, table, CREATE);
+	table->start_simulation = gettime(MILISECOND);
+	set_bool(&table->table_mutex, &table->all_threads_ready, true);
+	i = -1;
+	while (++i < table->philo_num)
+		safe_thread_handle(&table->philos[i].thread_id, NULL, NULL, JOIN);
+	set_bool(&table->table_mutex, &table->end_simulation, true);
+	safe_thread_handle(&table->monitor_thread, NULL, NULL, JOIN);
 }

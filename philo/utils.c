@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/16 22:55:32 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:40:36 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	error_exit(const char *error_message)
 
 void	clean(t_table *table)
 {
-	t_philo *philo;
-	int i;
+	t_philo	*philo;
+	int		i;
 
 	i = -1;
 	while (++i < table->philo_num)

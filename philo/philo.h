@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/16 23:57:57 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:40:40 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-#define W  "\033[37m"
-#define RST "\033[0m"
+# define W "\033[37m"
+# define RST "\033[0m"
 
 # define DEBUG_MOD 0
 
@@ -119,10 +119,8 @@ void					thinking(t_philo *philo, bool pre_smilutaion);
 void					clean(t_table *table);
 void					write_status(t_philo_status status, t_philo *philo,
 							bool debug);
-void	rease_long(t_mutex *mutex, long *src);
-void	*lone_philo(void *arg);
-void	sync_philo(t_philo *philo);
-
-
+void					rease_long(t_mutex *mutex, long *src);
+void					*lone_philo(void *arg);
+void					sync_philo(t_philo *philo);
 
 #endif

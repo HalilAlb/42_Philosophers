@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/14 16:27:14 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:58:57 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void precise_usleep(long usec, t_table *table)
         rum = usec - sed;
 
         if (rum > 1e3)
-            usleep(usec / 2);
+            usleep(rum / 2);
         else
         {
             while(gettime(MICROSECOND) - start < usec)
@@ -57,4 +57,21 @@ void error_exit(const char *error_message)
 {
     printf("Error: %s\n", error_message);
     exit(EXIT_FAILURE);
+}
+
+void clean(t_table *table)
+{
+    t_philo *philo;
+    int i;
+
+    i = -1;
+    while(++i < table->philo_num)
+    {
+        philo = table->philos + i;
+        safe_mutex_handle(&philo->philo_mutex, DESTROY);
+    }
+    safe_mutex_handle(&table->print_mutex, DESTROY);
+    safe_mutex_handle(&table->table_mutex, DESTROY);
+    free(table->forks);
+    free(table->philos);
 }

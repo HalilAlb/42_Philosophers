@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/14 19:30:20 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:13:45 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,14 @@ void set_long(t_mutex *mutex, long *dest, long value);
 bool simulations_fnished(t_table *table);
 long gettime(t_time_code time_code);
 
+bool all_threads_running(t_mutex *mutex, long *threads,long philo_num);
 
 void wait_all_threads(t_table *table);
 void precise_usleep(long usec, t_table *table);
+void *monitor_dinner(void *data);
+void thinking(t_philo *philo, bool pre_smilutaion);
+
+
 
 void write_status(t_philo_status status, t_philo *philo, bool debug);
 

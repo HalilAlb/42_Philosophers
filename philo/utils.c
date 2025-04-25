@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/25 03:16:35 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:04:22 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	precise_usleep(long usec, t_table *table)
 		sed = gettime(MICROSECOND);
 		rum = usec - sed;
 		if (rum > 1e3)
-			sleep(rum / 2);
+			usleep(rum / 2);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)

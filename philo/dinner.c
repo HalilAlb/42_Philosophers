@@ -107,3 +107,30 @@ void	dinner_start(t_table *table)
 	set_bool(&table->table_mutex, &table->end_simulation, true);
 	safe_thread_handle(&table->monitor_thread, NULL, NULL, JOIN);
 }
+
+
+// void	dinner_start(t_table *table)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	if (0 == table->num_limit_meals)
+// 		return ;
+// 	table->start_simulation = gettime(MILISECOND);
+// 	set_bool(&table->table_mutex, &table->all_threads_ready, true);
+// 	if (1 == table->philo_num)
+// 		safe_thread_handle(&table->philos[0].thread_id, lone_philo,
+// 			&table->philos[0], CREATE);
+// 	else
+// 	{
+// 		while (++i < table->philo_num)
+// 			safe_thread_handle(&table->philos[i].thread_id, dinner_simulations,
+// 				&table->philos[i], CREATE);
+// 	}
+// 	safe_thread_handle(&table->monitor_thread, monitor_dinner, table, CREATE);
+// 	i = -1;
+// 	while (++i < table->philo_num)
+// 		safe_thread_handle(&table->philos[i].thread_id, NULL, NULL, JOIN);
+// 	set_bool(&table->table_mutex, &table->end_simulation, true);
+// 	safe_thread_handle(&table->monitor_thread, NULL, NULL, JOIN);
+// }

@@ -17,7 +17,6 @@ static void	assign_fork(t_philo *philo, t_fork *forks, int philo_position)
 	int	philo_num;
 
 	philo_num = philo->table->philo_num;
-	
 	philo->first_fork = &forks[(philo_position + 1) % philo_num];
 	philo->second_fork = &forks[philo_position];
 	if (philo->id % 2 == 0)

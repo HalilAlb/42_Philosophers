@@ -74,3 +74,39 @@ void	clean(t_table *table)
 	free(table->forks);
 	free(table->philos);
 }
+
+// long	gettime(t_time_code time_code)
+// {
+// 	struct timeval	tv;
+
+// 	if (gettimeofday(&tv, NULL))
+// 		error_exit("gettimeofday failed");
+// 	if (SECOND == time_code)
+// 		return (tv.tv_sec);
+// 	else if (MILISECOND == time_code)
+// 		return (tv.tv_sec * 1000L + tv.tv_usec / 1000L);
+// 	else if (MICROSECOND == time_code)
+// 		return (tv.tv_sec * 1000000L + tv.tv_usec);
+// 	else
+// 		error_exit("wrong input to gettime");
+// 	return (1337);
+// }
+
+// void	precise_usleep(long usec, t_table *table)
+// {
+// 	long	start;
+// 	long	remaining;
+
+// 	start = gettime(MICROSECOND);
+// 	while ((gettime(MICROSECOND) - start) < usec)
+// 	{
+// 		if (simulations_fnished(table))
+// 			break ;
+// 		remaining = usec - (gettime(MICROSECOND) - start);
+// 		if (remaining > 1000)
+// 			usleep(remaining / 2);
+// 		else
+// 			while ((gettime(MICROSECOND) - start) < usec)
+// 				;
+// 	}
+// }

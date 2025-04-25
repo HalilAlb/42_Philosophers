@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/22 17:45:32 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/25 03:17:13 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*lone_philo(void *arg)
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
 	while (!simulations_fnished(philo->table))
-		usleep(200);
+		sleep(200);
 	return (NULL);
 }
 

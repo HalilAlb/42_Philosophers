@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:27:31 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 00:40:45 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:14:37 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	philo_dead(t_philo *philo)
 		return (false);
 	sed = gettime(MILISECOND) - get_long(&philo->philo_mutex,
 			&philo->last_meal_time);
-	to_die = philo->table->time_to_die / 1e3;
+	to_die = philo->table->time_to_die;
 	if (sed > to_die)
 		return (true);
 	return (false);

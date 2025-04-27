@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:27:31 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/27 12:14:37 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:33:03 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,4 @@ void	*monitor_dinner(void *data)
 	}
 	return (NULL);
 }
+

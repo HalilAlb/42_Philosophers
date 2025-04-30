@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 00:40:43 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:32:09 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ static const char	*valid_input(const char *str)
 	else if (*str == '-')
 		error_exit("Feed me only positive numbers");
 	if (!ft_isdigit(*str))
-		error_exit("The İnput is not a correct digit");
+		error_exit("The input is not a correct digit");
 	nbr = str;
-	while (ft_isdigit(*str++))
+	while (ft_isdigit(*str)) {
 		++len;
+		++str;
+	}
+	if (*str != '\0')
+		error_exit("The input has invalid characters");
 	if (len > 10)
 		error_exit("The number is too big, INT_MAX is the limit");
 	return (nbr);

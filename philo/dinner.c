@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/27 15:32:40 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/02 04:25:45 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	*lone_philo(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	
 	wait_all_threads(philo->table);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
@@ -95,9 +94,7 @@ void	dinner_start(t_table *table)
 	i = -1;
 	if (0 == table->num_limit_meals)
 		return ;
-	table->start_simulation = gettime(MILISECOND);
-	set_bool(&table->table_mutex, &table->all_threads_ready, true);
-	if (1 == table->philo_num)
+	else if (1 == table->philo_num)
 		safe_thread_handle(&table->philos[0].thread_id, lone_philo,
 			&table->philos[0], CREATE);
 	else
@@ -107,6 +104,8 @@ void	dinner_start(t_table *table)
 				&table->philos[i], CREATE);
 	}
 	safe_thread_handle(&table->monitor_thread, monitor_dinner, table, CREATE);
+	table->start_simulation = gettime(MILISECOND);
+	set_bool(&table->table_mutex, &table->all_threads_ready, true);
 	i = -1;
 	while (++i < table->philo_num)
 		safe_thread_handle(&table->philos[i].thread_id, NULL, NULL, JOIN);

@@ -6,18 +6,18 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/30 14:32:09 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:55:06 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_isdigit(int c)
+static inline bool	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-static int	ft_iswhitespace(char c)
+static inline bool	ft_iswhitespace(char c)
 {
 	return (((c >= 9 && c <= 13) || c == 32));
 }
@@ -37,12 +37,8 @@ static const char	*valid_input(const char *str)
 	if (!ft_isdigit(*str))
 		error_exit("The input is not a correct digit");
 	nbr = str;
-	while (ft_isdigit(*str)) {
+	while (ft_isdigit(*str++))
 		++len;
-		++str;
-	}
-	if (*str != '\0')
-		error_exit("The input has invalid characters");
 	if (len > 10)
 		error_exit("The number is too big, INT_MAX is the limit");
 	return (nbr);

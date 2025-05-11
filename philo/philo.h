@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 04:27:37 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/12 00:46:57 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_table
 	t_philo				*philos;
 }						t_table;
 
-void					error_exit(const char *error_message);
+int						error_exit(const char *error_message);
 void					parse_input(t_table *table, char **av);
 void					dinner_start(t_table *table);
 void					*safe_malloc(size_t bytes);

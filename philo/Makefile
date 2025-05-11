@@ -24,7 +24,7 @@ leak: $(OBJS)
 	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME)
 
 debug: 
-	$(CC) $(CFLAGS) -fsanitize=address -g $(SRCS) -o $(NAME)
+	$(CC) $(CFLAGS) -fsanitize=leak -g $(SRCS) -o $(NAME)
 
 tsan: $(SRCS)
 	$(CC) $(CFLAGS) -fsanitize=thread $(SRCS) -o $(NAME)

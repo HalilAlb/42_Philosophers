@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/12 00:46:57 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:24:43 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ typedef struct s_table
 }						t_table;
 
 int						error_exit(const char *error_message);
-void					parse_input(t_table *table, char **av);
-void					dinner_start(t_table *table);
+int						parse_input(t_table *table, char **av);
+int						dinner_start(t_table *table);
 void					*safe_malloc(size_t bytes);
-void					data_init(t_table *table);
-void					safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
-void					safe_thread_handle(pthread_t *thread,
+int						data_init(t_table *table);
+int						safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
+int						safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);
 void					set_bool(t_mutex *mutex, bool *dest, bool value);
 bool					get_bool(t_mutex *mutex, bool *src);

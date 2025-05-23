@@ -6,18 +6,18 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/12 00:47:58 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:56:46 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static inline bool	ft_isdigit(char c)
+static int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-static inline bool	ft_iswhitespace(char c)
+static int	ft_iswhitespace(char c)
 {
 	return (((c >= 9 && c <= 13) || c == 32));
 }
@@ -33,9 +33,9 @@ static const char	*valid_input(const char *str)
 	if (*str == '+')
 		++str;
 	else if (*str == '-')
-		error_exit("Feed me only positive numbers");
+		return (NULL);
 	if (!ft_isdigit(*str))
-		error_exit("The input is not a correct digit");
+		return (NULL);
 	nbr = str;
 	while (ft_isdigit(*str))
 	{
@@ -43,36 +43,52 @@ static const char	*valid_input(const char *str)
 		++str;
 	}
 	if (*str != '\0')
-		error_exit("The input has invalid characters");
+		return (NULL);
 	if (len > 10)
-		error_exit("The number is too big, INT_MAX is the limit");
+		return (NULL);
 	return (nbr);
 }
 
 static long	ft_atol(const char *str)
 {
-	long	num;
+	long		num;
+	const char	*valid;
 
 	num = 0;
-	str = valid_input(str);
-	while (ft_isdigit(*str))
-		num = (num * 10) + (*str++ - 48);
+	valid = valid_input(str);
+	if (!valid)
+		return (-1);
+	while (ft_isdigit(*valid))
+		num = (num * 10) + (*valid++ - 48);
 	if (num > INT_MAX)
-		error_exit("The number is too big, INT_MAX is the limit");
+		return (-1);
 	return (num);
 }
 
-void	parse_input(t_table *table, char **av)
+int	parse_input(t_table *table, char **av)
 {
 	table->philo_num = ft_atol(av[1]);
-	table->time_to_die = ft_atol(av[2]) * 1e3;
-	table->time_to_eat = ft_atol(av[3]) * 1e3;
-	table->time_to_sleep = ft_atol(av[4]) * 1e3;
+	if (table->philo_num <= 0)
+		return (1);
+	table->time_to_die = ft_atol(av[2]) * 1000;
+	if (table->time_to_die == -1)
+		return (1);
+	table->time_to_eat = ft_atol(av[3]) * 1000;
+	if (table->time_to_eat == -1)
+		return (1);
+	table->time_to_sleep = ft_atol(av[4]) * 1000;
+	if (table->time_to_sleep == -1)
+		return (1);
 	if (table->time_to_die < 6e4 || table->time_to_eat < 6e4
 		|| table->time_to_sleep < 6e4)
-		error_exit("Use timestamps major than 60ms");
+		return (1);
 	if (av[5])
+	{
 		table->num_limit_meals = ft_atol(av[5]);
+		if (table->num_limit_meals == -1)
+			return (1);
+	}
 	else
 		table->num_limit_meals = -1;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/12 00:48:11 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:24:44 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ long	gettime(t_time_code time_code)
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
-		error_exit("gettimeofday failed");
+		return (-1);
 	if (SECOND == time_code)
 		return (tv.tv_sec + (tv.tv_usec / 1e6));
 	else if (MILISECOND == time_code)
 		return ((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
 	else if (MICROSECOND == time_code)
 		return ((tv.tv_sec * 1e6) + tv.tv_usec);
-	else
-		error_exit("wrong input to gettime");
-	return (1337);
+	return (-1);
 }
 
 void	precise_usleep(long usec, t_table *table)
@@ -55,7 +53,7 @@ void	precise_usleep(long usec, t_table *table)
 int	error_exit(const char *error_message)
 {
 	printf("Error: %s\n", error_message);
-	return (1);
+	return (EXIT_FAILURE);
 }
 
 void	clean(t_table *table)

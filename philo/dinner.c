@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 04:25:45 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:30:18 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	*lone_philo(void *arg)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
-	write_status(EATING, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_eat, philo->table);
-	write_status(SLEEPING, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_sleep, philo->table);
+	write_status(DIAD, philo, DEBUG_MOD);
 	set_bool(&philo->philo_mutex, &philo->table->end_simulation, true);
 	while (!simulations_fnished(philo->table))
 		usleep(200);
@@ -87,13 +84,13 @@ void	*dinner_simulations(void *data)
 	return (NULL);
 }
 
-void	dinner_start(t_table *table)
+int	dinner_start(t_table *table)
 {
 	int	i;
 
 	i = -1;
 	if (0 == table->num_limit_meals)
-		return ;
+		return (0);
 	else if (1 == table->philo_num)
 		safe_thread_handle(&table->philos[0].thread_id, lone_philo,
 			&table->philos[0], CREATE);
@@ -111,4 +108,5 @@ void	dinner_start(t_table *table)
 		safe_thread_handle(&table->philos[i].thread_id, NULL, NULL, JOIN);
 	set_bool(&table->table_mutex, &table->end_simulation, true);
 	safe_thread_handle(&table->monitor_thread, NULL, NULL, JOIN);
+	return (0);
 }

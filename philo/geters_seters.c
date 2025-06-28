@@ -6,22 +6,22 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:40:56 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 22:42:52 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:14:20 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_bool(t_mutex *mutex, bool *dest, bool value)
+void	set_bool(t_mutex *mutex, t_bool *dest, t_bool value)
 {
 	safe_mutex_handle(mutex, LOCK);
 	*dest = value;
 	safe_mutex_handle(mutex, UNLOCK);
 }
 
-bool	get_bool(t_mutex *mutex, bool *src)
+t_bool	get_bool(t_mutex *mutex, t_bool *src)
 {
-	bool	value;
+	t_bool	value;
 
 	safe_mutex_handle(mutex, LOCK);
 	value = *src;
@@ -45,8 +45,7 @@ void	set_long(t_mutex *mutex, long *dest, long value)
 	*dest = value;
 	safe_mutex_handle(mutex, UNLOCK);
 }
-
-bool	simulations_fnished(t_table *table)
+t_bool	simulations_fnished(t_table *table)
 {
 	return (get_bool(&table->table_mutex, &table->end_simulation));
 }

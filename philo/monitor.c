@@ -6,25 +6,25 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:27:31 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 03:56:56 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:16:52 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool	philo_dead(t_philo *philo)
+static t_bool	philo_dead(t_philo *philo)
 {
 	long	sed;
 	long	to_die;
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
-		return (false);
+		return (FALSE);
 	sed = gettime(MILISECOND) - get_long(&philo->philo_mutex,
 			&philo->last_meal_time);
 	to_die = philo->table->time_to_die / 1e3;
 	if (sed > to_die)
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
 
 void	*monitor_dinner(void *data)
@@ -43,7 +43,7 @@ void	*monitor_dinner(void *data)
 		{
 			if (philo_dead(table->philos + i))
 			{
-				set_bool(&table->table_mutex, &table->end_simulation, true);
+				set_bool(&table->table_mutex, &table->end_simulation, TRUE);
 				write_status(DIAD, table->philos + i, DEBUG_MOD);
 			}
 		}

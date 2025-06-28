@@ -6,18 +6,18 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/01 17:55:06 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:15:14 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static inline bool	ft_isdigit(char c)
+static inline t_bool	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-static inline bool	ft_iswhitespace(char c)
+static inline t_bool	ft_iswhitespace(char c)
 {
 	return (((c >= 9 && c <= 13) || c == 32));
 }

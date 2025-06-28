@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 04:27:37 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:16:42 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <errno.h>
 # include <limits.h>
 # include <pthread.h>
-# include <stdbool.h>
+// # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
@@ -28,6 +28,10 @@
 # define DEBUG_MOD 0
 
 typedef struct s_table	t_table;
+typedef int t_bool;
+
+#define TRUE 1
+#define FALSE 0
 
 typedef enum s_status
 {
@@ -69,7 +73,7 @@ typedef struct s_philo
 {
 	int					id;
 	long				meals_counter;
-	bool				full;
+	t_bool				full;
 	long				last_meal_time;
 	t_fork				*first_fork;
 	t_fork				*second_fork;
@@ -86,8 +90,8 @@ typedef struct s_table
 	long				time_to_sleep;
 	long				num_limit_meals;
 	long				start_simulation;
-	bool				all_threads_ready;
-	bool				end_simulation;
+	t_bool				all_threads_ready;
+	t_bool				end_simulation;
 	long				threads_running_num;
 	pthread_t			monitor_thread;
 	t_mutex				table_mutex;
@@ -104,21 +108,21 @@ void					data_init(t_table *table);
 void					safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);
-void					set_bool(t_mutex *mutex, bool *dest, bool value);
-bool					get_bool(t_mutex *mutex, bool *src);
+void					set_bool(t_mutex *mutex, t_bool *dest, t_bool value);
+t_bool					get_bool(t_mutex *mutex,t_bool *src);
 long					get_long(t_mutex *mutex, long *src);
 void					set_long(t_mutex *mutex, long *dest, long value);
-bool					simulations_fnished(t_table *table);
+t_bool					simulations_fnished(t_table *table);
 long					gettime(t_time_code time_code);
-bool					all_threads_running(t_mutex *mutex, long *threads,
+t_bool					all_threads_running(t_mutex *mutex, long *threads,
 							long philo_num);
 void					wait_all_threads(t_table *table);
 void					precise_usleep(long usec, t_table *table);
 void					*monitor_dinner(void *data);
-void					thinking(t_philo *philo, bool pre_smilutaion);
+void					thinking(t_philo *philo, t_bool pre_smilutaion);
 void					clean(t_table *table);
 void					write_status(t_philo_status status, t_philo *philo,
-							bool debug);
+							t_bool debug);
 void					rease_long(t_mutex *mutex, long *src);
 void					*lone_philo(void *arg);
 void					sync_philo(t_philo *philo);

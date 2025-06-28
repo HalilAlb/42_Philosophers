@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:31:51 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 04:27:15 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:16:03 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	write_status_debug(t_philo_status status, t_philo *philo, long sed)
 		printf(W "%-6ld" RST "%d died😵\n", sed, philo->id);
 }
 
-void	write_status(t_philo_status status, t_philo *philo, bool debug)
+void	write_status(t_philo_status status, t_philo *philo, t_bool debug)
 {
 	long	sed;
 
-	sed = gettime(MILISECOND) - philo->table->start_simulation;
 	safe_mutex_handle(&philo->table->print_mutex, LOCK);
+	sed = gettime(MILISECOND) - philo->table->start_simulation;
 	if (debug)
 		write_status_debug(status, philo, sed);
 	else

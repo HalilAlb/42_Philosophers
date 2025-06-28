@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:49:45 by malbayra          #+#    #+#             */
-/*   Updated: 2025/04/17 22:43:35 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/06/29 01:14:39 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	rease_long(t_mutex *mutex, long *src)
 	safe_mutex_handle(mutex, UNLOCK);
 }
 
-bool	all_threads_running(t_mutex *mutex, long *threads, long philo_num)
+t_bool	all_threads_running(t_mutex *mutex, long *threads, long philo_num)
 {
-	bool	res;
+	t_bool	res;
 
-	res = false;
+	res = FALSE;
 	safe_mutex_handle(mutex, LOCK);
 	if (*threads == philo_num)
-		res = true;
+		res = TRUE;
 	safe_mutex_handle(mutex, UNLOCK);
 	return (res);
 }
@@ -47,6 +47,6 @@ void	sync_philo(t_philo *philo)
 	else
 	{
 		if (philo->id % 2)
-			thinking(philo, true);
+			thinking(philo, TRUE);
 	}
 }

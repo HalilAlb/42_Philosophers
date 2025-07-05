@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:54:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/06/29 01:12:45 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/05 11:44:52 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	philo_init(t_table *table)
 	}
 }
 
-void	data_init(t_table *table)
+int	 data_init(t_table *table)
 {
 	int	i;
 
@@ -62,4 +62,5 @@ void	data_init(t_table *table)
 		table->forks[i].fork_id = i;
 	}
 	philo_init(table);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:40:56 by malbayra          #+#    #+#             */
-/*   Updated: 2025/06/29 01:14:20 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/02 22:47:22 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	set_long(t_mutex *mutex, long *dest, long value)
 	*dest = value;
 	safe_mutex_handle(mutex, UNLOCK);
 }
+
 t_bool	simulations_fnished(t_table *table)
 {
 	return (get_bool(&table->table_mutex, &table->end_simulation));

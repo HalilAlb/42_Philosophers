@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/06/29 01:16:42 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/05 11:51:11 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <errno.h>
 # include <limits.h>
 # include <pthread.h>
-// # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
@@ -100,11 +99,11 @@ typedef struct s_table
 	t_philo				*philos;
 }						t_table;
 
-void					error_exit(const char *error_message);
-void					parse_input(t_table *table, char **av);
+int					error_exit(const char *error_message);
+int					parse_input(t_table *table, char **av);
 void					dinner_start(t_table *table);
 void					*safe_malloc(size_t bytes);
-void					data_init(t_table *table);
+int					data_init(t_table *table);
 void					safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);

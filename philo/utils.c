@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/05/02 04:32:10 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/05 11:45:19 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	precise_usleep(long usec, t_table *table)
 	}
 }
 
-void	error_exit(const char *error_message)
+int	error_exit(const char *error_message)
 {
 	printf("Error: %s\n", error_message);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
 void	clean(t_table *table)

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:54:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/05 11:44:52 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:00 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	philo_init(t_table *table)
 	}
 }
 
-int	 data_init(t_table *table)
+int	data_init(t_table *table)
 {
 	int	i;
 

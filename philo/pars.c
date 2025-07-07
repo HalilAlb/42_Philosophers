@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/05 11:42:31 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:08 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static long	ft_atol(const char *str)
 	return (num);
 }
 
-int	 parse_input(t_table *table, char **av)
+int	parse_input(t_table *table, char **av)
 {
 	table->philo_num = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]) * 1e3;

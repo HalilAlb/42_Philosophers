@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/05 11:51:11 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:11 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define DEBUG_MOD 0
 
 typedef struct s_table	t_table;
-typedef int t_bool;
+typedef int				t_bool;
 
-#define TRUE 1
-#define FALSE 0
+# define TRUE 1
+# define FALSE 0
 
 typedef enum s_status
 {
@@ -99,16 +99,16 @@ typedef struct s_table
 	t_philo				*philos;
 }						t_table;
 
-int					error_exit(const char *error_message);
-int					parse_input(t_table *table, char **av);
+int						error_exit(const char *error_message);
+int						parse_input(t_table *table, char **av);
 void					dinner_start(t_table *table);
 void					*safe_malloc(size_t bytes);
-int					data_init(t_table *table);
+int						data_init(t_table *table);
 void					safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);
 void					set_bool(t_mutex *mutex, t_bool *dest, t_bool value);
-t_bool					get_bool(t_mutex *mutex,t_bool *src);
+t_bool					get_bool(t_mutex *mutex, t_bool *src);
 long					get_long(t_mutex *mutex, long *src);
 void					set_long(t_mutex *mutex, long *dest, long value);
 t_bool					simulations_fnished(t_table *table);

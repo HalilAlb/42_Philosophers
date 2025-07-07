@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:59:51 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/05 11:43:53 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:48 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	}
 	if (data_init(&table) != 0)
 	{
-		clean(&table); 
+		clean(&table);
 		return (1);
 	}
 	dinner_start(&table);

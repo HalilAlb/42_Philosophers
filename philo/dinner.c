@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:42:53 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:45:50 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	*lone_philo(void *arg)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
-	write_status(EATING, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_eat, philo->table);
-	write_status(SLEEPING, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_sleep, philo->table);
+	precise_usleep(philo->table->time_to_die, philo->table);
+	write_status(DIAD, philo, DEBUG_MOD);
 	set_bool(&philo->philo_mutex, &philo->table->end_simulation, TRUE);
 	while (!simulations_fnished(philo->table))
 		usleep(200);

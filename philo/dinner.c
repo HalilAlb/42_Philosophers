@@ -21,9 +21,6 @@ void	*lone_philo(void *arg)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_die, philo->table);
-	write_status(DIAD, philo, DEBUG_MOD);
-	set_bool(&philo->philo_mutex, &philo->table->end_simulation, TRUE);
 	while (!simulations_fnished(philo->table))
 		usleep(200);
 	return (NULL);

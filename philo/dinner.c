@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/13 18:41:35 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:26:11 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int eat(t_philo *philo)
         return (1);
     return (0);
 }
+
+
 
 void	*dinner_simulations(void *data)
 {

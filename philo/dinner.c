@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:35:10 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/08 19:45:50 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:48:59 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	*lone_philo(void *arg)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	rease_long(&philo->table->table_mutex, &philo->table->threads_running_num);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
-	precise_usleep(philo->table->time_to_die, philo->table);
-	write_status(DIAD, philo, DEBUG_MOD);
-	set_bool(&philo->philo_mutex, &philo->table->end_simulation, TRUE);
-	while (!simulations_fnished(philo->table))
+	while (!simulations_fnished(philo->table) && !is_error(philo->table))
 		usleep(200);
 	return (NULL);
 }
@@ -47,11 +44,13 @@ void	thinking(t_philo *philo, t_bool pre_smilutaion)
 	precise_usleep(t_think * 0.42, philo->table);
 }
 
-static void	eat(t_philo *philo)
+static int	eat(t_philo *philo)
 {
-	safe_mutex_handle(&philo->first_fork->fork, LOCK);
+	if (safe_mutex_handle(&philo->first_fork->fork, LOCK) != 0)
+		return (1);
 	write_status(TAKE_FIRST_FORK, philo, DEBUG_MOD);
-	safe_mutex_handle(&philo->second_fork->fork, LOCK);
+	if (safe_mutex_handle(&philo->second_fork->fork, LOCK) != 0)
+		return (1);
 	write_status(TAKE_SECOND_FORK, philo, DEBUG_MOD);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	philo->meals_counter++;
@@ -60,8 +59,11 @@ static void	eat(t_philo *philo)
 	if (philo->table->num_limit_meals > 0
 		&& philo->meals_counter >= philo->table->num_limit_meals)
 		set_bool(&philo->philo_mutex, &philo->full, TRUE);
-	safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
-	safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
+	if (safe_mutex_handle(&philo->first_fork->fork, UNLOCK) != 0)
+		return (1);
+	if (safe_mutex_handle(&philo->second_fork->fork, UNLOCK) != 0)
+		return (1);
+	return (0);
 }
 
 void	*dinner_simulations(void *data)
@@ -75,9 +77,15 @@ void	*dinner_simulations(void *data)
 	sync_philo(philo);
 	while (!simulations_fnished(philo->table))
 	{
+		if (is_error(philo->table))
+			break ;
 		if (philo->full)
 			break ;
-		eat(philo);
+		if (eat(philo) != 0)
+		{
+			set_error(philo->table);
+			break ;
+		}
 		write_status(SLEEPING, philo, DEBUG_MOD);
 		precise_usleep(philo->table->time_to_sleep, philo->table);
 		thinking(philo, FALSE);

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:44:08 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:11 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:53:06 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_table
 	long				start_simulation;
 	t_bool				all_threads_ready;
 	t_bool				end_simulation;
+	t_bool				error_occurred;
 	long				threads_running_num;
 	pthread_t			monitor_thread;
 	t_mutex				table_mutex;
@@ -104,7 +105,7 @@ int						parse_input(t_table *table, char **av);
 void					dinner_start(t_table *table);
 void					*safe_malloc(size_t bytes);
 int						data_init(t_table *table);
-void					safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
+int						safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);
 void					set_bool(t_mutex *mutex, t_bool *dest, t_bool value);
@@ -125,5 +126,7 @@ void					write_status(t_philo_status status, t_philo *philo,
 void					rease_long(t_mutex *mutex, long *src);
 void					*lone_philo(void *arg);
 void					sync_philo(t_philo *philo);
+void					set_error(t_table *table);
+t_bool					is_error(t_table *table);
 
 #endif

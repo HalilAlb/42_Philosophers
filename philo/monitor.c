@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:27:31 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:06 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:50:45 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	*monitor_dinner(void *data)
 	while (!all_threads_running(&table->table_mutex,
 			&table->threads_running_num, table->philo_num))
 		;
-	while (!simulations_fnished(table))
+	while (!simulations_fnished(table) && !is_error(table))
 	{
 		i = -1;
-		while (++i < table->philo_num && !simulations_fnished(table))
+		while (++i < table->philo_num && !simulations_fnished(table)
+			&& !is_error(table))
 		{
 			if (philo_dead(table->philos + i))
 			{

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:01:42 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:44:33 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:54:34 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,50 @@ void	*safe_malloc(size_t bytes)
 	return (ptr);
 }
 
-static void	handle_mutex_error(int stat, t_opcode opcode)
+static int	handle_mutex_error(int stat, t_opcode opcode)
 {
 	if (0 == stat)
-		return ;
+		return (0);
 	if (EINVAL == stat && (LOCK == opcode || UNLOCK == opcode
 			|| DESTROY == opcode))
-		error_exit("The value of the mutex is invalid");
+		return (error_exit("The value of the mutex is invalid"));
 	else if (EINVAL == stat && INIT == opcode)
-		error_exit("The value of the mutex is invalid");
+		return (error_exit("The value of the mutex is invalid"));
 	else if (EDEADLK == stat)
-		error_exit("A deadlock would accur if the thread\
-			blocked waiting for the mutex");
+		return (error_exit("A deadlock would accur if the thread\
+            blocked waiting for the mutex"));
 	else if (EPERM == stat)
-		error_exit("The current thread does not hold a lock on mutex");
+		return (error_exit("The current thread does not hold a lock on mutex"));
 	else if (ENOMEM == stat)
-		error_exit("The process connot allocate enough\
-			memory to create another the mutex");
+		return (error_exit("The process connot allocate enough\
+            memory to create another the mutex"));
 	else if (EBUSY == stat)
-		error_exit("Mutex is Locked");
+		return (error_exit("Mutex is Locked"));
+	return (1);
 }
 
-void	safe_mutex_handle(t_mutex *mutex, t_opcode opcode)
+int	safe_mutex_handle(t_mutex *mutex, t_opcode opcode)
 {
+	int	result;
+
+	result = 0;
 	if (LOCK == opcode)
-		handle_mutex_error(pthread_mutex_lock(mutex), opcode);
+		result = pthread_mutex_lock(mutex);
 	else if (UNLOCK == opcode)
-		handle_mutex_error(pthread_mutex_unlock(mutex), opcode);
+		result = pthread_mutex_unlock(mutex);
 	else if (INIT == opcode)
-		handle_mutex_error(pthread_mutex_init(mutex, NULL), opcode);
+		result = pthread_mutex_init(mutex, NULL);
 	else if (DESTROY == opcode)
-		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
+		result = pthread_mutex_destroy(mutex);
 	else
-		error_exit("wrong opcode for mutex handle");
+	{
+		return (error_exit("wrong opcode for mutex handle"));
+	}
+	if (result != 0)
+	{
+		return (handle_mutex_error(result, opcode));
+	}
+	return (0);
 }
 
 static void	handle_thread_error(int stat, t_opcode opcode)

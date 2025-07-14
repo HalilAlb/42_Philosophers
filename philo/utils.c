@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:02:39 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:21 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:52:32 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,20 @@ void	precise_usleep(long usec, t_table *table)
 
 int	error_exit(const char *error_message)
 {
-	printf("Error: %s\n", error_message);
+	static int	error_count = 0;
+
+	if (error_count == 0)
+	{
+		printf("Error: %s\n", error_message);
+		error_count++;
+	}
 	return (1);
+}
+
+void	set_error(t_table *table)
+{
+	set_bool(&table->table_mutex, &table->error_occurred, TRUE);
+	set_bool(&table->table_mutex, &table->end_simulation, TRUE);
 }
 
 void	clean(t_table *table)

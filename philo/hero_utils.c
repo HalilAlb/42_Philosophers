@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:49:45 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:42:58 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:49:38 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	rease_long(t_mutex *mutex, long *src)
 	safe_mutex_handle(mutex, LOCK);
 	(*src)++;
 	safe_mutex_handle(mutex, UNLOCK);
+}
+
+t_bool	is_error(t_table *table)
+{
+	return (get_bool(&table->table_mutex, &table->error_occurred));
 }
 
 t_bool	all_threads_running(t_mutex *mutex, long *threads, long philo_num)

@@ -6,7 +6,7 @@
 /*   By: malbayra <malbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:59:51 by malbayra          #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:48 by malbayra         ###   ########.fr       */
+/*   Updated: 2025/07/14 19:50:22 by malbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	{
 		error_exit("Wrong input:\n"
 			"Correct is: ./philo 5 800 200 200 [5]");
+		return (1);
 	}
 	if (parse_input(&table, av) != 0)
 	{
@@ -30,7 +31,10 @@ int	main(int ac, char **av)
 		clean(&table);
 		return (1);
 	}
-	dinner_start(&table);
+	if (!is_error(&table))
+	{
+		dinner_start(&table);
+	}
 	clean(&table);
 	return (0);
 }

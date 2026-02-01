@@ -161,5 +161,6 @@ void    precise_sleep(long ms)
 - **GitHub:** [https://github.com/HalilAlb]
 
 ---
+! = Cheat'ten dolayı yanlış çalışan proje publictedir orijinal olan private de kalıyor.
 
 *Bu proje 42 School müfredatının bir parçasıdır.*
